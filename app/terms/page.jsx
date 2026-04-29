@@ -16,7 +16,7 @@ export default function TermsPage() {
           Terms and Conditions
         </h1>
 
-        <div style={{ color: 'var(--ink-100)', lineHeight: 1.8, fontSize: 16 }}>
+        <div style={{ color: 'var(--ink-500)', lineHeight: 1.8, fontSize: 16 }}>
           <h2 style={{ fontSize: 24, fontWeight: 700, marginTop: 40, marginBottom: 16, color: 'var(--ink-50)' }}>
             1. Agreement to Terms
           </h2>

@@ -122,43 +122,6 @@ export default function StudentDashboardPage() {
       minHeight: '100vh',
       background: 'var(--ink-50)',
     }}>
-      {/* Header */}
-      <div style={{
-        background: 'var(--canvas)',
-        borderBottom: '1px solid var(--ink-100)',
-        padding: '20px 0',
-      }}>
-        <div className="container" style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-        }}>
-          <Link href="/" style={{
-            fontSize: 24,
-            fontWeight: 700,
-            color: 'var(--ink-50)',
-            textDecoration: 'none',
-          }}>
-            TECHFRONT HUB
-          </Link>
-          <button
-            onClick={handleLogout}
-            style={{
-              padding: '8px 16px',
-              background: 'transparent',
-              border: '1px solid var(--ink-200)',
-              borderRadius: 8,
-              cursor: 'pointer',
-              fontSize: 14,
-              fontWeight: 600,
-              color: 'var(--ink-700)',
-            }}
-          >
-            Logout
-          </button>
-        </div>
-      </div>
-
       {/* Main Content */}
       <div className="container" style={{ padding: '60px 0' }}>
         {/* Welcome Section */}
