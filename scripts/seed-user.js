@@ -2,12 +2,15 @@
 
 async function createUser() {
   try {
-    const res = await fetch('http://localhost:3000/api/users', {
+    const res = await fetch('http://localhost:3001/api/users', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         email: 'admin@techfronthub.com',
-        password: 'Admin@2026'
+        password: 'Admin@2026',
+        name: 'Admin User',
+        role: 'admin',
+        status: 'active'
       })
     })
 
@@ -24,11 +27,11 @@ async function createUser() {
     console.log('✓ Admin user created:')
     console.log(`  Email: ${data.doc?.email || data.email}`)
     console.log(`  Password: Admin@2026`)
-    console.log('\nLogin at: http://localhost:3000/admin/login')
+    console.log('\nLogin at: http://localhost:3001/admin/login')
     process.exit(0)
   } catch (err) {
     console.error('Error:', err.message)
-    console.error('\nNote: Make sure dev server is running on http://localhost:3000')
+    console.error('\nNote: Make sure dev server is running on http://localhost:3001')
     process.exit(1)
   }
 }

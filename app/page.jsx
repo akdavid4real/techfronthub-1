@@ -30,6 +30,7 @@ export default function Page() {
     testimonials: null,
     packages:     null,
     udemy:        null,
+    siteConfig:   null,
   });
 
   useEffect(() => {
@@ -47,13 +48,15 @@ export default function Page() {
       get('/testimonials?limit=50'),
       get('/packages?limit=50'),
       get('/udemy-courses?limit=50'),
-    ]).then(([courses, cats, testimonials, packages, udemy]) => {
+      get('/globals/site-config'),
+    ]).then(([courses, cats, testimonials, packages, udemy, siteConfig]) => {
       setData({
         courses:      courses?.docs?.length      ? courses.docs      : null,
         categories:   cats?.docs?.length         ? cats.docs         : null,
         testimonials: testimonials?.docs?.length ? testimonials.docs : null,
         packages:     packages?.docs?.length     ? packages.docs     : null,
         udemy:        udemy?.docs?.length        ? udemy.docs        : null,
+        siteConfig:   siteConfig?.doc            ?? null,
       });
     }).finally(() => setLoading(false));
   }, []);
@@ -61,8 +64,8 @@ export default function Page() {
   return (
     <div className="app-container">
       <main>
-        <Hero/>
-        <Trusted/>
+        <Hero siteConfig={data.siteConfig}/>
+        <Trusted siteConfig={data.siteConfig}/>
         <CourseSlider  courses={data.courses} loading={loading}/>
         <Catalog/>
         <UdemyGrid     udemy={data.udemy}/>
@@ -70,7 +73,7 @@ export default function Page() {
         <Categories    categories={data.categories}/>
         <Packages      packages={data.packages}/>
         <Testimonials  testimonials={data.testimonials}/>
-        <FinalCTA/>
+        <FinalCTA siteConfig={data.siteConfig}/>
       </main>
 
       <div className={"tweaks" + (editMode ? " on" : "")}>

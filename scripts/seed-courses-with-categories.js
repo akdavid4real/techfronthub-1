@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const BASE = 'http://localhost:3000/api'
+const BASE = 'http://localhost:3001/api'
 
 const COURSES_BY_CATEGORY = {
   'Data Analytics': [

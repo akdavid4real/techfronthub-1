@@ -11,6 +11,7 @@ const TILES = [
   { slug: 'testimonials',  label: 'Testimonials',  href: '/admin/collections/testimonials' },
   { slug: 'udemy-courses', label: 'Udemy Courses', href: '/admin/collections/udemy-courses' },
   { slug: 'users',         label: 'Users',          href: '/admin/collections/users' },
+  { slug: 'media-assets',  label: 'Media',         href: '/admin/media' },
 ]
 
 function StatCard({ label, value, href }) {
@@ -61,6 +62,12 @@ export default function Dashboard() {
               <div className="a-card-title">Quick Actions</div>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+              <Link href="/admin/users" className="btn btn-ghost btn-sm" style={{ justifyContent: 'flex-start' }}>
+                Manage Users
+              </Link>
+              <Link href="/admin/media" className="btn btn-ghost btn-sm" style={{ justifyContent: 'flex-start' }}>
+                Media Library
+              </Link>
               {[
                 { label: '+ New Course',      href: '/admin/collections/courses/create' },
                 { label: '+ New Testimonial', href: '/admin/collections/testimonials/create' },

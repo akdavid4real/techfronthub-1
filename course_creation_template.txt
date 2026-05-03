@@ -1,0 +1,51 @@
+# Detailed Course Creation Guide & Example
+Use this example to craft high-impact course content for TECHFRONT HUB.
+
+## 1. Basic Information
+- Title: Full-Stack AI Engineering & Automation
+- Course Code: AI-FS-500
+- Category: AI & Automation (Select this in the dropdown)
+- Short Description: Master the art of building production-grade AI applications. From fine-tuning LLMs to deploying automated agents with Next.js and Python.
+- Tag: BOOTCAMP
+- Tag Hot: Yes (Displays the fire icon)
+
+## 2. Branding & Pricing
+- Color Hue: 225 (Deep Blue/Purple - looks premium)
+- Price: 250,000
+- Old Price: 350,000 (Shows a 100k discount)
+- Level: Advanced
+- Duration: 12 Weeks
+- Lessons: 48
+- Format: Hybrid (Live Cohort + Recorded Access)
+
+## 3. What You Will Learn (Benefits)
+1. Architecting Multi-Agent Systems: Learn to coordinate multiple AI agents to solve complex business logic.
+2. Production RAG Pipelines: Build advanced Retrieval Augmented Generation systems with vector databases like Pinecone.
+3. Fine-tuning LLMs: Practical experience fine-tuning Llama 3 and GPT-4o for specific domain tasks.
+4. AI UX Design: Master the "Generative UI" patterns using Vercel AI SDK.
+5. Deployment & Scaling: Deploy AI apps with specialized infrastructure (modal.com, LangServe).
+
+## 4. Program Overview (The 12-Week Curriculum)
+- Week 1: Foundation of Modern AI
+  Description: Understanding Transformers, Attention mechanisms, and the current LLM landscape. Setting up the local dev environment with Ollama and Python.
+- Week 2: Advanced Prompt Engineering & Structured Outputs
+  Description: Moving beyond simple prompts. Using Instructor and Pydantic to force AI to return perfect JSON every time.
+- Week 3: Vector Databases & RAG
+  Description: Deep dive into embeddings, chunking strategies, and semantic search. Implementing hybrid search for maximum accuracy.
+- Week 4: Building Agents with LangGraph
+  Description: Creating stateful, multi-turn AI agents that can use tools and make decisions autonomously.
+- Week 5: Frontend for AI (Generative UI)
+  Description: Building sleek interfaces that stream AI responses in real-time. Using React Server Components for AI-driven data viz.
+- Week 6: Building an AI-Powered CRM
+  Description: Project Week. Integrating all learned concepts to build a functional, automated sales assistant.
+- [Weeks 7-12: Scaling, Security, and Final Capstone Projects...]
+
+## 5. Who This Is For (Target Audience)
+1. Senior Software Engineers looking to pivot into AI.
+2. Technical Founders building AI-first startups.
+3. Data Scientists who want to move from notebooks to production applications.
+
+## 6. Support & Guarantee
+- Support: You get access to a private Discord with 24/7 TA support, weekly 1-on-1 code reviews with the instructor, and a lifetime access to the community.
+- Guarantee: 100% Satisfaction Guarantee. If you don't build a production-ready AI app by Week 6, we will provide extra 1-on-1 coaching until you do.
+- Certificate: Certified Full-Stack AI Engineer (Industry Recognized).

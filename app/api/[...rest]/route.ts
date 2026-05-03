@@ -1,32 +1,42 @@
-import { getPayload } from 'payload'
-import config from '@/payload.config'
+import { getCachedPayload } from './payload'
 
 async function handle(req: Request) {
-  const payload = await getPayload({ config })
+  const reqStart = Date.now()
+  const payload = await getCachedPayload()
+  const payloadTime = Date.now() - reqStart
+  
   const url = new URL(req.url)
   const pathname = url.pathname.replace('/api/', '')
 
   try {
-    if (pathname === 'users/login' && req.method === 'POST') {
+    // Auth endpoints
+    if (pathname.endsWith('/login') && req.method === 'POST') {
+      const collection = pathname.split('/')[0]
       const { email, password } = await req.json()
+      
+      const loginStart = Date.now()
       const result = await payload.login({
-        collection: 'users',
+        collection: collection as any,
         data: { email, password },
       })
+      const loginTime = Date.now() - loginStart
+      console.log(`[PERF] ${email} login: Total=${Date.now() - reqStart}ms (Init=${payloadTime}ms, Auth=${loginTime}ms)`)
+      
       return Response.json({ user: result.user, token: result.token })
     }
 
-    if (pathname === 'users/logout' && req.method === 'POST') {
+    if (pathname.endsWith('/logout') && req.method === 'POST') {
       return Response.json({ success: true })
     }
 
-    if (pathname === 'users/me' && req.method === 'GET') {
+    if (pathname.endsWith('/me') && req.method === 'GET') {
+      const collection = pathname.split('/')[0]
       const auth = req.headers.get('authorization')
       if (!auth?.startsWith('JWT ')) return Response.json({ user: null }, { status: 401 })
       try {
         const token = auth.slice(4)
         const decoded = JSON.parse(Buffer.from(token.split('.')[1], 'base64url').toString())
-        const user = await payload.findByID({ collection: 'users', id: decoded.id })
+        const user = await payload.findByID({ collection: collection as any, id: decoded.id })
         return Response.json({ user })
       } catch {
         return Response.json({ user: null }, { status: 401 })
@@ -79,7 +89,7 @@ async function handle(req: Request) {
       return Response.json({ doc })
     }
 
-    if (req.method === 'PATCH' && id) {
+    if ((req.method === 'PATCH' || req.method === 'PUT') && id) {
       const data = await req.json()
       const doc = await payload.update({
         collection: collection as any,

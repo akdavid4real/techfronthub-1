@@ -8,9 +8,12 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "payload": "node --import tsx node_modules/payload/dist/bin/index.js"
+    "payload": "node --import tsx node_modules/payload/dist/bin/index.js",
+    "db:migrate": "node scripts/with-direct-db.mjs pnpm payload migrate",
+    "db:pull": "node scripts/with-direct-db.mjs pnpm exec drizzle-kit pull --config=drizzle.config.ts"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.1041.0",
     "@payloadcms/db-postgres": "^3",
     "@payloadcms/next": "^3",
     "@payloadcms/richtext-lexical": "^3",
@@ -26,6 +29,7 @@
     "@types/node": "^22",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
+    "drizzle-kit": "^0.31.10",
     "eslint": "^10.2.1",
     "eslint-config-next": "^15",
     "eslint-plugin-react-hooks": "^7.1.1",

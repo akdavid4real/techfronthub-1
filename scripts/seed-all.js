@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const BASE = 'http://localhost:3000/api'
+const BASE = 'http://localhost:3001/api'
 
 async function api(method, path, data) {
   const res = await fetch(`${BASE}${path}`, {
@@ -44,8 +44,8 @@ async function seedCollection(slug, items) {
 
 // ── Users ──────────────────────────────────────────────────────────────────
 const USERS = [
-  { email: 'admin@techfronthub.com',      password: 'Admin@2026' },
-  { email: 'instructor@techfronthub.com', password: 'Instructor@2026' },
+  { email: 'admin@techfronthub.com',      password: 'Admin@2026',      name: 'Admin User',      role: 'admin',      status: 'active', phone: '+234 800 000 0001' },
+  { email: 'instructor@techfronthub.com', password: 'Instructor@2026', name: 'Instructor User', role: 'instructor', status: 'active', phone: '+234 800 000 0002' },
 ]
 
 
@@ -238,6 +238,22 @@ const SITE_CONFIG = {
   ctaBody:     'Join 12,400+ learners who traded uncertain futures for working careers in data, engineering and AI.',
 }
 
+// ── Instructors ───────────────────────────────────────────────────────────
+const INSTRUCTORS = [
+  { 
+    email: 'instructor@techfronthub.ng', 
+    password: 'Instructor123!',
+    name: 'Main Instructor (NG)',
+    expertise: 'Full-Stack Development, Data Science'
+  },
+  { 
+    email: 'instructor@techfronthub.com', 
+    password: 'Instructor123!',
+    name: 'Main Instructor (COM)',
+    expertise: 'Full-Stack Development, Data Science'
+  },
+]
+
 async function run() {
   console.log('TECHFRONT HUB — Seed Script')
   console.log('============================')
@@ -245,6 +261,7 @@ async function run() {
 
   try {
     await seedCollection('users', USERS)
+    await seedCollection('instructors', INSTRUCTORS)
     await seedCollection('categories', CATEGORIES)
     await seedCollection('courses', COURSES)
     await seedCollection('testimonials', TESTIMONIALS)
@@ -260,8 +277,8 @@ async function run() {
     }
 
     console.log('\n✓ Seed complete.')
-    console.log('\nAdmin login: admin@techfronthub.com / Admin@2026')
-    console.log('Instructor:  instructor@techfronthub.com / Instructor@2026')
+    console.log('\nAdmin login:      admin@techfronthub.com / Admin@2026')
+    console.log('Instructor login: instructor@techfronthub.ng / Instructor123!')
   } catch (e) {
     console.error('\n✗ Fatal:', e.message)
     process.exit(1)

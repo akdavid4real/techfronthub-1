@@ -14,7 +14,6 @@ const COLLECTIONS = [
   { slug: 'packages',     label: 'Packages' },
   { slug: 'testimonials', label: 'Testimonials' },
   { slug: 'udemy-courses', label: 'Udemy Courses' },
-  { slug: 'users',        label: 'Users' },
 ]
 
 const GLOBALS = [
@@ -43,6 +42,14 @@ function Sidebar({ user, onLogout }) {
         <NavLink href="/admin">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
           Dashboard
+        </NavLink>
+        <NavLink href="/admin/users">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75"><path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Z"/><path d="M4 20a8 8 0 1 1 16 0"/></svg>
+          Users
+        </NavLink>
+        <NavLink href="/admin/media">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="2"/><path d="m21 15-5-5-5 5-2-2-6 6"/></svg>
+          Media
         </NavLink>
       </div>
 

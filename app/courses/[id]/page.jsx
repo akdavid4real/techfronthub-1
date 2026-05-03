@@ -77,6 +77,37 @@ export default async function CoursePage({ params }) {
 
   const c = course
 
+  const whatYouLearn = c.whatYouLearn?.length
+    ? c.whatYouLearn.map(i => i.benefit)
+    : [
+        'Build real projects you can put in your portfolio',
+        'Work with industry-standard tools and workflows',
+        'Understand core concepts at a deep, transferable level',
+        'Get structured feedback from working practitioners',
+        'Collaborate with peers on team deliverables',
+        'Leave with a verifiable certificate of completion',
+      ]
+
+  const programOverview = c.programOverview?.length
+    ? c.programOverview.map(i => ({ week: i.week, topic: i.title, desc: i.description }))
+    : [
+        { week: 'Week 1–2',   topic: 'Foundations & environment setup',    desc: 'Core concepts, tooling, and your first hands-on exercises.' },
+        { week: 'Week 3–4',   topic: 'Core skills — part one',             desc: 'Structured learning sessions with live instructor walkthroughs.' },
+        { week: 'Week 5–6',   topic: 'Core skills — part two',             desc: 'Deepening knowledge with real-world data and scenarios.' },
+        { week: 'Week 7–8',   topic: 'Practical application',              desc: 'Mini-project: apply everything learned to a defined problem.' },
+        { week: 'Week 9–10',  topic: 'Advanced techniques',                desc: 'Edge cases, optimisation, and industry best practices.' },
+        { week: 'Week 11–12', topic: 'Capstone project & peer review',     desc: 'Ship your final project, present it, and receive structured feedback.' },
+      ].slice(0, Math.ceil((c.lessons ?? 60) / 10))
+
+  const whoThisIsFor = c.whoThisIsFor?.length
+    ? c.whoThisIsFor.map(i => i.audience)
+    : [
+        'Professionals looking to upskill or pivot into a tech-adjacent role',
+        'Recent graduates who want practical, portfolio-ready experience',
+        'Entrepreneurs building digital products or data-driven businesses',
+        'Anyone who learns best through structured cohorts and real projects',
+      ]
+
   return (
     <div style={{ minHeight: '100vh', background: 'var(--paper)', color: 'var(--ink-700)' }}>
       {/* Back nav */}
@@ -90,6 +121,17 @@ export default async function CoursePage({ params }) {
 
       {/* Hero banner */}
       <div style={{ ...flyerBg(c.hue), padding: '64px 24px 56px', position: 'relative', overflow: 'hidden' }}>
+        {/* Supabase Thumbnail Background */}
+        {c.thumbnail && (
+          <div style={{
+            position: 'absolute', inset: 0,
+            backgroundImage: `url(${c.thumbnail})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            opacity: 0.15,
+            mixBlendMode: 'overlay'
+          }} />
+        )}
         {/* Subtle grid pattern for hero */}
         <div style={{ position: 'absolute', inset: 0, opacity: 0.1, pointerEvents: 'none', backgroundImage: 'radial-gradient(circle at 2px 2px, #fff 1px, transparent 0)', backgroundSize: '32px 32px' }} />
         
@@ -121,14 +163,7 @@ export default async function CoursePage({ params }) {
           <section style={{ marginBottom: 56 }}>
             <h2 style={{ fontSize: 24, fontWeight: 700, marginBottom: 24, color: '#fff', letterSpacing: '-0.01em' }}>What you'll learn</h2>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
-              {[
-                'Build real projects you can put in your portfolio',
-                'Work with industry-standard tools and workflows',
-                'Understand core concepts at a deep, transferable level',
-                'Get structured feedback from working practitioners',
-                'Collaborate with peers on team deliverables',
-                'Leave with a verifiable certificate of completion',
-              ].map((item, i) => (
+              {whatYouLearn.map((item, i) => (
                 <div key={i} style={{ display: 'flex', gap: 12, alignItems: 'flex-start', padding: '16px', background: 'var(--ink-100)', borderRadius: 12, border: '1px solid var(--ink-200)', transition: 'transform 0.2s ease' }}>
                   <span style={{ color: 'var(--success)', fontWeight: 700, fontSize: 16, flexShrink: 0 }}>✓</span>
                   <span style={{ fontSize: 14.5, color: 'var(--ink-700)', lineHeight: 1.5 }}>{item}</span>
@@ -141,21 +176,14 @@ export default async function CoursePage({ params }) {
           <section style={{ marginBottom: 56 }}>
             <h2 style={{ fontSize: 24, fontWeight: 700, marginBottom: 24, color: '#fff', letterSpacing: '-0.01em' }}>Program overview</h2>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-              {[
-                { week: 'Week 1–2',   topic: 'Foundations & environment setup',     desc: 'Core concepts, tooling, and your first hands-on exercises.' },
-                { week: 'Week 3–4',   topic: 'Core skills — part one',              desc: 'Structured learning sessions with live instructor walkthroughs.' },
-                { week: 'Week 5–6',   topic: 'Core skills — part two',              desc: 'Deepening knowledge with real-world data and scenarios.' },
-                { week: 'Week 7–8',   topic: 'Practical application',               desc: 'Mini-project: apply everything learned to a defined problem.' },
-                { week: 'Week 9–10',  topic: 'Advanced techniques',                 desc: 'Edge cases, optimisation, and industry best practices.' },
-                { week: 'Week 11–12', topic: 'Capstone project & peer review',      desc: 'Ship your final project, present it, and receive structured feedback.' },
-              ].slice(0, Math.ceil((c.lessons ?? 60) / 10)).map((m, i) => (
+              {programOverview.map((m, i) => (
                 <div key={i} style={{
                   display: 'grid', gridTemplateColumns: '120px 1fr',
                   padding: '20px 24px', gap: 20,
-                  background: i % 2 === 0 ? 'var(--ink-100)' : 'transparent',
-                  border: '1px solid var(--ink-200)',
+                  background: i % 2 === 0 ? 'rgba(255,255,255,0.04)' : 'transparent',
+                  border: '1px solid rgba(255,255,255,0.08)',
                   borderTop: i === 0 ? undefined : 'none',
-                  borderRadius: i === 0 ? '12px 12px 0 0' : (i === Math.ceil((c.lessons ?? 60) / 10) - 1 ? '0 0 12px 12px' : '0'),
+                  borderRadius: i === 0 ? '12px 12px 0 0' : (i === programOverview.length - 1 ? '0 0 12px 12px' : '0'),
                 }}>
                   <span style={{ fontSize: 12, fontWeight: 700, color: 'var(--brand-500)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>{m.week}</span>
                   <div>
@@ -171,15 +199,10 @@ export default async function CoursePage({ params }) {
           <section style={{ marginBottom: 56 }}>
             <h2 style={{ fontSize: 24, fontWeight: 700, marginBottom: 24, color: '#fff', letterSpacing: '-0.01em' }}>Who this is for</h2>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
-              {[
-                'Professionals looking to upskill or pivot into a tech-adjacent role',
-                'Recent graduates who want practical, portfolio-ready experience',
-                'Entrepreneurs building digital products or data-driven businesses',
-                'Anyone who learns best through structured cohorts and real projects',
-              ].map((item, i) => (
+              {whoThisIsFor.map((item, i) => (
                 <div key={i} style={{ display: 'flex', gap: 14, alignItems: 'flex-start' }}>
                   <span style={{ color: 'var(--brand-500)', fontWeight: 700, fontSize: 18, lineHeight: 1.3 }}>→</span>
-                  <span style={{ fontSize: 16, color: 'var(--ink-700)', lineHeight: 1.6 }}>{item}</span>
+                  <span style={{ fontSize: 16, color: 'var(--ink-200)', lineHeight: 1.6 }}>{item}</span>
                 </div>
               ))}
             </div>
@@ -192,11 +215,11 @@ export default async function CoursePage({ params }) {
               <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
                 {related.docs.map(r => (
                   <Link key={r.id} href={`/courses/${r.id}`} style={{ textDecoration: 'none' }}>
-                    <div style={{ display: 'flex', gap: 18, padding: '18px 24px', background: 'var(--ink-100)', border: '1px solid var(--ink-200)', borderRadius: 12, alignItems: 'center', transition: 'all 0.2s ease' }}>
+                    <div style={{ display: 'flex', gap: 18, padding: '18px 24px', background: 'var(--canvas)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 12, alignItems: 'center', transition: 'all 0.2s ease' }}>
                       <div style={{ width: 52, height: 52, borderRadius: 10, flexShrink: 0, ...flyerBg(r.hue), backgroundSize: 'cover' }} />
                       <div style={{ flex: 1 }}>
                         <div style={{ fontWeight: 600, fontSize: 15, color: '#fff', marginBottom: 2 }}>{r.title}</div>
-                        <div style={{ fontSize: 12.5, color: 'var(--ink-400)' }}>{r.duration} · {r.level}</div>
+                        <div style={{ fontSize: 12.5, color: 'var(--ink-300)' }}>{r.duration} · {r.level}</div>
                       </div>
                       <div style={{ fontSize: 15, fontWeight: 700, color: 'var(--brand-500)', whiteSpace: 'nowrap' }}>{r.price}</div>
                     </div>
@@ -252,22 +275,22 @@ export default async function CoursePage({ params }) {
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
                 {[
-                  ['Duration',  c.duration ?? '—'],
-                  ['Lessons',   c.lessons ? `${c.lessons} lessons` : '—'],
-                  ['Level',     c.level ?? '—'],
-                  ['Format',    'Cohort-based, live online'],
-                  ['Certificate', 'Yes, on completion'],
-                  ['Support',   'Slack + weekly office hours'],
+                  ['Duration',    c.duration    || '—'],
+                  ['Lessons',     c.lessons     ? `${c.lessons} lessons` : '—'],
+                  ['Level',       c.level       || '—'],
+                  ['Delivery',    c.format      || 'Cohort-based, live online'],
+                  ['Certificate', c.certificate || 'Professional Certificate'],
+                  ['Support',     c.support     || 'Slack + weekly office hours'],
                 ].map(([label, value]) => (
                   <div key={label} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: 13.5 }}>
-                    <span style={{ color: 'var(--ink-400)' }}>{label}</span>
-                    <span style={{ fontWeight: 600, color: 'var(--ink-900)' }}>{value}</span>
+                    <span style={{ color: 'rgba(255,255,255,0.4)' }}>{label}</span>
+                    <span style={{ fontWeight: 600, color: '#fff', textAlign: 'right', marginLeft: 20 }}>{value}</span>
                   </div>
                 ))}
               </div>
 
               <div style={{ marginTop: 24, paddingTop: 20, borderTop: '1px solid var(--ink-200)', fontSize: 12, color: 'var(--ink-500)', textAlign: 'center', lineHeight: 1.5 }}>
-                30-day satisfaction guarantee<br/>No hidden fees · Secure checkout
+                {c.guarantee || '30-day satisfaction guarantee'}<br/>No hidden fees · Secure checkout
               </div>
             </div>
           </div>

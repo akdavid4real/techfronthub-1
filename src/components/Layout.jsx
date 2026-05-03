@@ -64,7 +64,7 @@ export function Header() {
   };
 
   return (
-    <header className="header">
+    <header className={`header${isMenuOpen ? ' menu-is-open' : ''}`}>
       <div className="container">
         <Link href="/" className="brand" aria-label="TECHFRONT HUB">
           <span className="brand-mark">TF</span>
@@ -72,7 +72,7 @@ export function Header() {
         </Link>
 
         {!isAuthenticated && (
-          <nav className={`nav ${isMenuOpen ? 'mobile-open' : ''}`} style={{ flex: 1, display: 'flex', justifyContent: 'center', gap: 40 }}>
+          <nav className={`nav ${isMenuOpen ? 'mobile-open' : ''}`}>
             {NAV_LINKS.map(l => (
               <a key={l.href} href={l.href} onClick={close}>{l.label}</a>
             ))}
@@ -83,7 +83,7 @@ export function Header() {
         )}
 
         {isAuthenticated && (
-          <nav className={`nav ${isMenuOpen ? 'mobile-open' : ''}`} style={{ flex: 1, display: 'flex', justifyContent: 'center', gap: 40 }}>
+          <nav className={`nav ${isMenuOpen ? 'mobile-open' : ''}`}>
             <Link href="/student/dashboard" onClick={close}>Dashboard</Link>
             <Link href="/student/dashboard/courses" onClick={close}>My Courses</Link>
             <Link href="/courses" onClick={close}>Explore</Link>
@@ -123,7 +123,7 @@ export function Footer() {
               <span className="brand-name">TECHFRONT<span className="dot">.</span>HUB</span>
             </Link>
             <p className="about-copy">Nigeria's career-focused tech academy — cohort bootcamps, 1-on-1 coaching and corporate training for the next wave of builders.</p>
-            <div style={{fontSize: 13, display: "flex", flexDirection: "column", gap: 8}}>
+            <div className="footer-contact" style={{fontSize: 13, display: "flex", flexDirection: "column", gap: 8}}>
               <span style={{display: "flex", gap: 8, alignItems: "center"}}><I.MapPin size={14}/> Bodija, Ibadan · Lekki, Lagos</span>
               <a href="mailto:hello@techfronthub.ng" style={{display: "flex", gap: 8, alignItems: "center", color: "inherit", textDecoration: "none"}}><I.Mail size={14}/> hello@techfronthub.ng</a>
               <a href="tel:+2348100000000" style={{display: "flex", gap: 8, alignItems: "center", color: "inherit", textDecoration: "none"}}><I.Phone size={14}/> +234 810 000 0000</a>

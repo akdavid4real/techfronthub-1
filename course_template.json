@@ -1,0 +1,34 @@
+{
+  "title": "Course Title Here",
+  "code": "CODE-101",
+  "desc": "A comprehensive course description goes here.",
+  "category": 1,
+  "instructor": 1,
+  "tag": "NEW",
+  "tagHot": true,
+  "duration": "12 Weeks",
+  "lessons": 24,
+  "level": "Intermediate",
+  "price": "150,000",
+  "old": "200,000",
+  "hue": 214,
+  "format": "Online / Live Classes",
+  "certificate": "Professional Certificate",
+  "guarantee": "Money-back guarantee if not satisfied",
+  "whatYouLearn": [
+    { "benefit": "First key learning outcome" },
+    { "benefit": "Second key learning outcome" }
+  ],
+  "programOverview": [
+    {
+      "week": "Week 1",
+      "title": "Introduction to the Topic",
+      "description": "Getting started with the fundamentals and environment setup."
+    }
+  ],
+  "whoThisIsFor": [
+    { "audience": "Developers looking to level up" },
+    { "audience": "Career changers" }
+  ],
+  "support": "24/7 Slack support and weekly live Q&A sessions."
+}
